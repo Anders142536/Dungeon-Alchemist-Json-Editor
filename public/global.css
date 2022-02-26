@@ -17,12 +17,12 @@ html, body {
 }
 
 body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
+	background-color: var(--white);
+	color: var(--light-gray);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	margin: 0;
 }
+
 
 a {
 	color: rgb(0,100,200);
@@ -48,7 +48,7 @@ input, button, select, textarea {
 	padding: 0.4em;
 	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
+	border: 1px solid var(--light-gray);
 	border-radius: 2px;
 }
 
@@ -57,8 +57,8 @@ input:disabled {
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
+	color: var(--gray);
+	background-color: var(--light-gray);
 	outline: none;
 }
 
@@ -76,18 +76,28 @@ button:focus {
 
 
 #map {
-	
+	position: absolute;
+	z-index: 0;
 }
 
 #filebar {
-
+	position: absolute;
+	left: 0px;
+	z-index: 1;
 }
 
 #inspector {
+	position: absolute;
+	right: 0px;
+	height: 100%;
+	z-index: 1;
 
 }
 
 .interface {
 	background-color: var(--gray);
 	color: var(--light-gray);
+	padding: 10px;
+	box-sizing: border-box;
+	width: 400px;
 }
