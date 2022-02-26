@@ -74,6 +74,7 @@ button:focus {
 	border-color: #666;
 }
 
+
 #map {
 	
 }
@@ -90,8 +91,3 @@ button:focus {
 	background-color: var(--gray);
 	color: var(--light-gray);
 }
-
-
-
-
-

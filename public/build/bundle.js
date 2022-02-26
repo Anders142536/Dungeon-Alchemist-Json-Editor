@@ -27,6 +27,9 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function append(target, node) {
+        target.appendChild(node);
+    }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
     }
@@ -35,9 +38,6 @@ var app = (function () {
     }
     function element(name) {
         return document.createElement(name);
-    }
-    function svg_element(name) {
-        return document.createElementNS('http://www.w3.org/2000/svg', name);
     }
     function text(data) {
         return document.createTextNode(data);
@@ -282,6 +282,10 @@ var app = (function () {
     function dispatch_dev(type, detail) {
         document.dispatchEvent(custom_event(type, Object.assign({ version: '3.46.4' }, detail), true));
     }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
     function insert_dev(target, node, anchor) {
         dispatch_dev('SvelteDOMInsert', { target, node, anchor });
         insert(target, node, anchor);
@@ -296,6 +300,13 @@ var app = (function () {
             dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
     }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
@@ -329,47 +340,60 @@ var app = (function () {
     const file = "src/App.svelte";
 
     function create_fragment(ctx) {
-    	let svg;
+    	let main;
+    	let h1;
     	let t0;
-    	let div0;
     	let t1;
-    	let div1;
+    	let t2;
+    	let t3;
+    	let p;
+    	let t4;
+    	let a;
+    	let t6;
 
     	const block = {
     		c: function create() {
-    			svg = svg_element("svg");
-    			t0 = space();
-    			div0 = element("div");
-    			t1 = space();
-    			div1 = element("div");
-    			attr_dev(svg, "id", "map");
-    			add_location(svg, file, 5, 0, 23);
-    			attr_dev(div0, "id", "filebar");
-    			attr_dev(div0, "class", "interface");
-    			add_location(div0, file, 6, 0, 44);
-    			attr_dev(div1, "id", "inspector");
-    			attr_dev(div1, "class", "interface");
-    			add_location(div1, file, 7, 0, 87);
+    			main = element("main");
+    			h1 = element("h1");
+    			t0 = text("Hello ");
+    			t1 = text(/*name*/ ctx[0]);
+    			t2 = text("!");
+    			t3 = space();
+    			p = element("p");
+    			t4 = text("Visit the ");
+    			a = element("a");
+    			a.textContent = "Svelte tutorial";
+    			t6 = text(" to learn how to build Svelte apps.");
+    			attr_dev(h1, "class", "svelte-1tky8bj");
+    			add_location(h1, file, 4, 1, 54);
+    			attr_dev(a, "href", "https://svelte.dev/tutorial");
+    			add_location(a, file, 5, 14, 91);
+    			add_location(p, file, 5, 1, 78);
+    			attr_dev(main, "class", "svelte-1tky8bj");
+    			add_location(main, file, 3, 0, 46);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, svg, anchor);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div0, anchor);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, div1, anchor);
+    			insert_dev(target, main, anchor);
+    			append_dev(main, h1);
+    			append_dev(h1, t0);
+    			append_dev(h1, t1);
+    			append_dev(h1, t2);
+    			append_dev(main, t3);
+    			append_dev(main, p);
+    			append_dev(p, t4);
+    			append_dev(p, a);
+    			append_dev(p, t6);
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*name*/ 1) set_data_dev(t1, /*name*/ ctx[0]);
+    		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(svg);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div0);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(main);
     		}
     	};
 
@@ -384,22 +408,37 @@ var app = (function () {
     	return block;
     }
 
-    function instance($$self, $$props) {
+    function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	const writable_props = [];
+    	let { name } = $$props;
+    	const writable_props = ['name'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	return [];
+    	$$self.$$set = $$props => {
+    		if ('name' in $$props) $$invalidate(0, name = $$props.name);
+    	};
+
+    	$$self.$capture_state = () => ({ name });
+
+    	$$self.$inject_state = $$props => {
+    		if ('name' in $$props) $$invalidate(0, name = $$props.name);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [name];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, {});
+    		init(this, options, instance, create_fragment, safe_not_equal, { name: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -407,11 +446,29 @@ var app = (function () {
     			options,
     			id: create_fragment.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*name*/ ctx[0] === undefined && !('name' in props)) {
+    			console.warn("<App> was created without expected prop 'name'");
+    		}
+    	}
+
+    	get name() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set name(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
-    var app = new App({
-    	target: document.body
+    const app = new App({
+        target: document.body,
+        props: {
+            name: 'world'
+        }
     });
 
     return app;
