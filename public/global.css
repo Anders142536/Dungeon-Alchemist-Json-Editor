@@ -1,3 +1,15 @@
+:root {
+	--white:		#E7EEEE; /* map background */
+	--light-blue:	#CFDEDE; /* grid lines*/
+	--dark-gray:	#101919; /* walls */
+	--gray:			#283e3e; /* interface background */
+	--light-gray:	#94B3B3; /* interface elements */
+	--yellow:		#FFB10A; /* light fill */
+	--orange:		#F07A05; /* light center */
+	--brown:		#83430C; /* doors */
+}
+
+
 html, body {
 	position: relative;
 	width: 100%;
@@ -61,3 +73,25 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+#map {
+	
+}
+
+#filebar {
+
+}
+
+#inspector {
+
+}
+
+.interface {
+	background-color: var(--gray);
+	color: var(--light-gray);
+}
+
+
+
+
+
