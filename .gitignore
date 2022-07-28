@@ -1,0 +1,6 @@
+# these must be excluded
+node_modules
+public/build/
+
+# these are subjective things like ide settings etc
+.vscode
