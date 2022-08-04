@@ -1,6 +1,11 @@
 <script>
-
-
 </script>
 
-<svg id='map'></svg>
+<svg id="map" />
+
+<style>
+  #map {
+    position: absolute;
+    z-index: 0;
+  }
+</style>
