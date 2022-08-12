@@ -27,11 +27,21 @@
     </select>
   </div>
 </form>
+<div class="button-bar">
+  <input type="button" value="Cancel" />
+  <input type="button" value="Save" />
+</div>
 
 <style>
   .editor-grid {
     display: grid;
     grid-template-columns: auto minmax(0px, 10em) 7em;
     gap: 10px;
+  }
+
+  .button-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
   }
 </style>
