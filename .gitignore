@@ -4,3 +4,4 @@ public/build/
 
 # these are subjective things like ide settings etc
 .vscode
+package-lock.json
