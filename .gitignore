@@ -1,7 +1,7 @@
 # these must be excluded
 node_modules
 public/build/
+package-lock.json
 
 # these are subjective things like ide settings etc
 .vscode
-package-lock.json
