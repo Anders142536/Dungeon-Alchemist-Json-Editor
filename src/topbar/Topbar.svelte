@@ -1,7 +1,12 @@
 <script>
+  import Export from './export/Export.svelte'
+  import Import from './import/Import.svelte'
 </script>
 
-<div id="topbar" class="interface" />
+<div id="topbar" class="interface">
+  <Import />
+  <Export />
+</div>
 
 <style>
   #topbar {

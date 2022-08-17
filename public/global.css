@@ -1,17 +1,26 @@
 :root {
-	--white:		#E7EEEE; /* map background */
-	--light-blue:	#CFDEDE; /* grid lines*/
-	--dark-gray:	#101919; /* walls */
+	--white: #E7EEEE;
+	/* map background */
+	--light-blue: #CFDEDE;
+	/* grid lines*/
+	--dark-gray: #101919;
+	/* walls */
 	/* vero: maybe something warmer? */
-	--gray:			#283e3e; /* interface background */
-	--light-gray:	#94B3B3; /* interface elements */
-	--yellow:		#FFB10A; /* light fill */
-	--orange:		#F07A05; /* light center */
-	--brown:		#83430C; /* doors */
+	--gray: #283e3e;
+	/* interface background */
+	--light-gray: #94B3B3;
+	/* interface elements */
+	--yellow: #FFB10A;
+	/* light fill */
+	--orange: #F07A05;
+	/* light center */
+	--brown: #83430C;
+	/* doors */
 }
 
 
-html, body {
+html,
+body {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -25,27 +34,28 @@ body {
 
 
 a {
-	color: rgb(0,100,200);
+	color: rgb(0, 100, 200);
 	text-decoration: none;
 }
- 
+
 a:hover {
 	text-decoration: underline;
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: rgb(0, 80, 160);
 }
 
 label {
 	display: block;
 }
 
-input, select {
+input,
+select {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
+	/* padding: 0.4em; */
 	box-sizing: border-box;
 	border: 1px solid var(--light-gray);
 	border-radius: 2px;
@@ -59,6 +69,7 @@ input:disabled {
 
 input[type='button'] {
 	outline: none;
+	padding: 0.3em 1em;
 }
 
 input[type='button']:disabled {
@@ -79,7 +90,7 @@ input[type='color'] {
 	padding: 0px;
 }
 
-input[type='color'] > div {
+input[type='color']>div {
 	border: 1.5px solid var(--light-gray);
 }
 
@@ -93,5 +104,3 @@ input[type='color'] > div {
 	box-shadow: 0 0 10px gray,
 		inset 0 0 30px rgba(0, 0, 0, 0.25);
 }
-
-
