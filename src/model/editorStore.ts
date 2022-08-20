@@ -7,6 +7,8 @@ class EditorStore {
   public range: Writable<number | null> = writable(null)
   public wallType: Writable<WallType | null> = writable(null)
 
+
+
   reset() {
     this.color.set(null)
     this.intensity.set(null)

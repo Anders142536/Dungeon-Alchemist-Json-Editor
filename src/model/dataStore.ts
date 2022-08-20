@@ -5,8 +5,8 @@ import type { Light, Wall } from './model'
     import based on a given JSON object and should be able to create the
     necessary export string without the roll20-prefix. */
 class DataStore {
-  private _walls: Writable<Map<number, Wall>> = writable(new Map())
-  private _lights: Writable<Map<number, Light>> = writable(new Map())
+  public readonly walls: Writable<Map<number, Wall>> = writable(new Map())
+  public readonly lights: Writable<Map<number, Light>> = writable(new Map())
 
   // walls and lights are mapped id -> object
   private _wallIndex: number = 0
@@ -21,7 +21,10 @@ class DataStore {
   }
 
   deleteWall(index: number) {
-    // TODO: this
+    this.walls.update(n => {
+      n.delete(index)
+      return n
+    })
   }
 
   deleteLight(index: number) {
